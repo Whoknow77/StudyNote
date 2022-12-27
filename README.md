@@ -1,6 +1,8 @@
 # Git
 
-   - [기본 명령어] (#StudyNote\Git\command.md)
-   - [원리] (#StudyNote\Git\gistory.md)
+   - [기본명령어](https://github.com/Whoknow77/StudyNote/blob/master/Git/command.md)
+   - [원리](https://github.com/Whoknow77/StudyNote/blob/master/Git/gistory.md)
 
 # HTML / CSS / JS
+
+   - [기초 문법] 
