@@ -1,8 +1,6 @@
 
 # HTML & CSS & JS
 
-<details>
-<summary>기초문법</summary>
 
 ----------------------------------
 
