@@ -10,7 +10,7 @@
 
 - 문제 상황
 
-    - 어떤 브랜치는 무엇을 위해 만든 브랜치?
+    - 이 브랜치는 무엇을 위해 만든 브랜치?
 
     - 어떤 브랜치를 끌어와서 개발을 시작해야 할지?
 
@@ -25,54 +25,55 @@
 
 - ### Git-Flow 전략
     
-    - 특징
+    -  **특징**
 
         - 많은 기업에서 표준으로 사용하는 브랜치 전략
 
         - Github Flow와 다르게 5개의 브랜치를 운영하여 관리
 
         - **배포 주기가 길고 팀이 여력이 있는 경우 적합**
-    - 구조
+
+    -  **구조**
 
 
-        - 메인 브랜치
+        - **메인 브랜치**
 
             - 항상 남아있다.
   
 
             1) Master
 
-                 제품으로 배포할 수 있는 브랜치
+                 제품으로 **배포**할 수 있는 브랜치
 
             2) Develop
 
-                 개발자들이 개발을 하는 브랜치
+                 개발자들이 **개발**을 하는 브랜치
     
 
-        - 보조 브랜치
+        - **보조 브랜치**
 
-            - 메인 브랜치와 다르게 사용을 마치면 브랜치를 삭제한다.
+            - 메인 브랜치와 다르게 사용을 마치면 브랜치를 **삭제**한다.
 
-          -  보통 개발자 저장소에만 있고, origin에는 push하지 않는다.
+            -  보통 개발자 저장소에만 있고, origin(원격 저장소)에는 push하지 않는다.
 
-            3) feature
+            1) feature
 
                 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fl7ghN%2FbtrlEIzgZhO%2FYr4Bq3K2Rdmo37VhmG9KBk%2Fimg.png">
 
                 - 하나의 **새로운 기능**을 만들 때 생성
 
-                - 완성시에 develop 브랜치로 merge
+                - 완성시에 **develop** 브랜치로 merge
                 
-            4) release
+            2) release
             
                 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbfrnW4%2FbtrlKeQT8mr%2FTw2TZEkr39sZIeoKUJES8k%2Fimg.png">
 
                 - 배포를 위한 최종적인 **버그 수정**
 
-                - 완성 시에 develop브랜치로 merge, 태그 추가
+                - 완성 시에 **develop**브랜치로 merge, 태그 추가
                 
 
-            5) hotfix
+            3) hotfix
 
                 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fct9FBn%2FbtrlGJqMMST%2FJgZHcI2gO5IkcXwwMNckA0%2Fimg.png">
 
@@ -80,17 +81,54 @@
 
                 - 버그를 해결하면 보통 제거하는 일회성 가지
 
-        
+                - 완성 시에 **develop**브랜치와 **master** 브랜치로 merge
 
-    - 흐름
+    - ### 흐름
+
+        -  **신규 기능 개발**
+
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc4oHhU%2FbtrlEsJEeue%2FCao2ePzB1Bdx8OAH9eAKk0%2Fimg.png">
+
+            1) develop 브랜치로부터 신규 개발할 기능을 위한 **feature**브랜치를 생성한다.
+            2) 기능을 완성하면 **develop** 브랜치에 merge를 한다.
+
+            <br>
+            <br>
+
+        - **라이브 서버로 배포**
+
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbLxHoz%2FbtrlPoeoynz%2FU795uDv8y9GkT4tHtLdykK%2Fimg.png">
+
+            3) feature 브랜치들이 모두 develop 브랜치에 merge 되었다면 QA(품질 보증)을 위해 **release** 브랜치를 생성한다.
+            4)  오류 확인 시, release 브랜치 내에서 수정 진행
+            5)  QA와 테스트 모두 통과시에 배포를 위해 **release** 브랜치를 **master** 브랜치로 merge(**develop** 브랜치 쪽으로도 merge)
+
+            <br>
+            <br>
+
+        - **배포 후 관리**
+
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbw4I9Q%2FbtrlOVXIxW0%2Fzf8ol3GOUpRdUAEfyduKZ0%2Fimg.png">
+
+            1) 배포된 라이브 서버(master)에서 버그가 발생하면, **hotfix** 브랜치를 생성하여 버그 픽스를 진행한다.
+            2)  종료된 버그 픽스를 **master**와 **develop** 브랜치에 merge한다.
+
+            <br>
+            <br>
+        
+        - **전체적인 흐름**
+
+            <img src="https://ifh.cc/g/CJyyBW.jpg">
+
+        
 
 - ### Github-flow 전략
 
     - 특징
 
-        - Git-Flow 방식에 비해 단순함
+        - Git-Flow 방식에 비해 **단순함**
 
-        - 자동화 개념이 들어가 있다.
+        - **자동화** 개념이 들어가 있다.
 
         - 어떤 이유로든 새로운 브랜치를 생성하는 것으로 시작됨
 
@@ -147,6 +185,18 @@
             <img src="https://ifh.cc/g/2pC4pH.png">
 
             - master로 merge가 일어나면 자동으로 배포가 되도록 설정해놓는다.(CI/CD)
+
+            <br>
+
+## 무엇을 사용해야 할까?
+
+- ## Git flow
+
+    1개월 이상의 **긴 호흡**으로 개발하여 주기적으로 배포, QA 및 테스트, hotfix 등 수행할 수 있는 여력이 있는 팀
+
+- ## Githubflow
+
+    **수시로 릴리즈** 되어야 할 필요가 있는 서비스를 지속적으로 테스트하고 배포하는 팀
 
 
 
