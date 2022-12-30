@@ -24,6 +24,6 @@ StudyNote(공부하고 기록하는 공간)</h1>
 
    - [기초 문법](https://github.com/Whoknow77/StudyNote/blob/master/html/css/js/element.md)
 
-# [SystemProgramming](https://github.com/Whoknow77/StudyNote/blob/master/Git/gitbranch.md)
+# [SystemProgramming](https://github.com/Whoknow77/StudyNote/blob/master/System/system.md)
 
   
