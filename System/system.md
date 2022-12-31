@@ -1831,66 +1831,28 @@ Semaphore는 음이 아닌 전역변수 P, V operation으로 변경할 수 있�
                 - int close(int fd)
 
                     - fd를 **Unmap**한다.
-
-                    
+            
     - ### File_Offset
+  
+      - 파일의 시작지점부터 현재 커서의 위치까지 얼마나 떨어져 있는지 정수로 보여주는 것이 offset 값
+      - 파일이 오픈된 후에 0부터 시작한다.
+      - 관련된 함수
+
+        1) off_t lseek(int fd, off_t pos, int origin)
+
+            - **file offset 값을 변경**시킨다.
+            - origin
+
+                1) SEEK_CUR : 현재 파일 offset + pos값
+                2) SEEK_END : 현재 파일 end + pos값
+                3) SEEK_SET : pos값으로 offset 설정
+
+            - 오류 시 -1, 성공 시 새로운 file offset값을 반환한다.
     - ### Multiplexed I/O
     - ### Memory Mapped I/O
     - ### I/O Redirection
     - ### Standard I/O
     
-
-
-    
-
-    
-
-
-
-
-    
-        
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    
-
-        
-    
-    
-
-
-
-
-
-    
-
-
-
-
-
-
 
 
 
