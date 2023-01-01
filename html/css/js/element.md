@@ -2,6 +2,8 @@
 # HTML & CSS & JS
 
 <details> <summary>HTML</summary>
+
+
       
 + 블럭요소(block)   
 p, div, h, ul, ol ,form 요소가 대표적이고, 데이터가 수평으로 쌓이며, 너비,여백을 설정할 수 없고 가로세로 모두 최소한으로 지정된다.
@@ -65,6 +67,20 @@ tr은 행을, td는 열을 만드는 태그로 html에서 복잡하게 행렬을
 
 <details> <summary>CSS</summary>   
       
+## Text-align vs align-item
+
+```
+text-align:center;
+```
+
+- span,a,label,image,normal text 등 **각종 비 정형화/텍스트 객체**에 적용가능하다.
+
+```
+align-item="center"
+```
+
+- div,table 등의 **정형화 및 공간 객체**에 적용가능하다.
+
 + ### 전체 선택자   
 (*)
 + ### 태그 선택자      
