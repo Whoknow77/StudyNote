@@ -1,25 +1,6 @@
 
 # HTML & CSS & JS
 
-
-----------------------------------
-
-HTML, CSS부분은 모르는 내용 위주로 정리 하고, JS는 꼼꼼하게 정리한다.
-
-----------------------------------
-
-<details>
-      <summary> vscode 단축키 모음 </summary>
-
-+ 전체저장   
-Ctrl + Alt + S   
-      
-+ 사이드바 열기/닫기   
- Ctrl + B    
-+ 주석처리   
-원하는 영역 드래그 후 Ctrl + /   
-            </details>
-
 <details> <summary>HTML</summary>
       
 + 블럭요소(block)   
