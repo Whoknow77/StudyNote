@@ -1,3 +1,106 @@
+## **Object**
+
+- ### 정의
+
+   ```js
+   const obj1={}; // literal
+   const obj2=new Object(); // consructor
+   ```
+
+   - key : value 형태로 값이 할당된다.
+   - 두 가지 방식으로 객체 생성
+
+
+
+   ```js
+   const whoknow={name:'whoknow', age:26};
+
+   whoknow.hasHand=true; // 추가
+   delete whoknow.hasHand; // 삭제
+   ```
+
+   - 자바스크립트는 **Runtime시에 동적으로 타입이 결정**되기 때문에 추가, 삭제가 가능함. 
+
+
+
+ - ### 접근
+
+   ```js
+   console.log(whoknow.name);
+   console.log(whoknow['name']);
+   ```
+
+   - '.' 또는 key값으로 접근 가능
+
+ - ### Shorthand
+
+   ```js
+   function makePerson(name, age){
+      return{
+      name,
+      age,
+   };
+   }
+
+   <!-- function makePerson(name, age){
+      return{
+         name:name,
+         age:age
+      };
+   } -->
+   ```
+
+   - key와 value가 같다면 축약 가능
+
+ - ### for..in vs for..of
+
+      - **for ..in**
+
+         - **Object**에서 모든 key들을 받아와서 처리할 때 사용한다.
+
+
+      - **for ..of**
+
+         - Object가 아닌 배열, 리스트 같은 순차적인 **literable한 구조**에서 사용한다.
+
+ - ### Clone
+
+      - **깊은 복사**
+
+         ```js
+         const user={name:'whoknow', age:'26'};
+         const user2= user;
+         ```
+
+         - user가 가리키는 **주소값**을 user2도 가리키게 됨
+         - reference 참조기 때문에 어느 한쪽이 수정되면 다른쪽도 모두 수정됨
+
+      -  **얕은 복사**
+
+         ```js
+         const user={};
+         const user2={name:'whoknow'};
+         Object.assign(user, user2);
+         ```
+
+         - 맨 왼쪽 인자가 Target이 되고, 오른쪽의 다수의 인자들을 합하여 만든 user를 반환한다.
+
+         - 인자로 여러개의 배열이 들어갈 수도 있다.
+
+
+## 참고자료
+
+https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6h-2&index=7
+
+-----------------------------------------------------
+
+   
+
+
+
+
+
+
 ## **Array**
 
 - ### 반복
@@ -226,10 +329,71 @@
 
       
 
+## **Parameter**
 
+   1. Default Parameter
 
+      ```js
+      function show(msg, from){
+      if(from===undefined){
+         from='Whoknow';
+      }
+      console.log(`${msg}by ${from}`)
+      }
+      show('Hi!');
+      ```
 
+      - 인자 두개를 받도록 선언된 함수를 호출 시, 인자를 하나를 보낼 때
+
+         두번째 인자값이 **undefined**로 저장된다.
+   2. Rest Parameter
+
+      ```js
+      function show(msg, from = Whoknow){
+      console.log(`${msg}by ${from}`)
+      }
+      show('Hi!');
+      ```
+
+      - 선언시에 인자 = 변수명으로 선언하여 undefined일 때 **기본 from값을 저장**한다.
+
+   
 ## **arrow function**
+
+   - 함수를 **간결**하게 하기 위함
+
+   ```js
+   const f = () => console.log('print');
+
+   <!-- const f = function(){
+      console.log('print');
+   }  -->
+   ```
+
+
+   - **중괄호**, **함수명** 생략 가능
+   
+   ```js
+   const f = (a,b) => a+b;
+   
+   <!-- const f = function(a,b){
+      return a+b;
+   } -->
+   ```
+
+   - 함수 내부가 한 줄일 경우, 중괄호없이 **return도 생략** 가능
+
+   ```js
+   const f = (a,b) =>{
+      // do something more!
+      return a+b;
+   }
+   ```
+
+   - 여러 줄일 경우, **중괄호** 넣어서 사용해야 함!
+
+
+
       
 
 
@@ -539,3 +703,95 @@ https://ko.javascript.info/script-async-defer
    https://axce.tistory.com/59
 
    ------------------------------------------------------
+
+   ## JSON
+
+   - ### 정의
+   
+      <img src="https://ifh.cc/g/sc2t6a.jpg">
+
+      - 서버와 클라이언트 통신에 필요한 API
+      - JSON은 파싱 또는 직렬화 없이도 JavaScript 프로그램에서 사용할 수 있습니다. JSON은 JavaScript 객체 리터럴, 배열, 스칼라 데이터를 표현하는 텍스트 기반의 방식이다.
+
+      - JSON은 상대적으로 쉽게 읽고 작성할 수 있고, 소프트웨어에서 파싱 및 생성하기도 쉽습니다. 종종 구조화된 데이터를 직렬화해 이를 네트워크에서 교환할 때(보통 서버와 웹 애플리케이션 간) 사용된다.
+
+      - 특정 언어에 종속되지 않으며, 대부분의 프로그래밍 언어에서 JSON 포맷의 데이터를 핸들링 할 수 있는 라이브러리를 제공한다.
+
+   - ### 방식
+
+      - Serialize
+
+         - **Object -> JSON**로 변환시켜 key:value 형태로 클라이언트와 서버간의 데이터를 전송한다.
+
+         - **Stringify()**
+
+            - **Object를 JSON으로 변환시켜 주는 함수**
+            ```js
+            let json = JSON.stringify(true);
+            console.log(json);
+
+            json = JSON.stringify(['apple', 'banana']);
+            console.log(json);
+            ```
+            - boolean, 배열등의 primitive 타입등을 JSON으로 변환 시킨다.
+
+            ```js
+               const rabbit={
+               name:'tori',
+               color:'white',
+               birthDate: new Date(),
+               jump: () =>{
+                  console.log(`${name} can jump!`);
+               }
+            }
+            json = JSON.stringify(rabbit);
+            console.log(json);
+            ```
+
+            - **Object 타입을 JSON으로 변환 시킨다.**
+            - **함수, 사용자 정의 data**는 Object에 있는 데이터가 아니기 때문에 JSON에 포함되지 않는다.
+            - attribute값(콜백함수 등등)을 통해 원하는 속성만으로 이루어진 JSON 반환 가능
+
+               ```js
+               json = JSON.stringify(rabbit, ["name"]);
+
+               json = JSON.stringify(rabbit, (key, value) => {
+                  console.log(`key:${key}, value:${value});
+                  return value;
+               })
+               ```
+    
+      -  Deserialize
+
+            - **JSON -> Object**로 변환한다.
+
+         - **parse(json)**
+
+            - **JSON을 Object로 변환시켜 주는 함수**
+
+            ```js
+            json=JSON.stringify(rabbit);
+            const obj=JSON.parse(json);
+            console.log(obj);
+            ```
+
+## 참고자료
+
+https://nesoy.github.io/articles/2017-02/JSON
+
+https://www.youtube.com/watch?v=FN_D4Ihs3LE&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6h-2&index=10
+
+--------------------------------------------------
+
+## **비동기 처리**
+
+### **콜백**
+
+      
+
+### **Promise**
+
+### **async & await**
+
+
+
