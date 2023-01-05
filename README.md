@@ -20,11 +20,13 @@ StudyNote(공부하고 기록하는 공간)</h1>
 
    - [Git branch 전략](https://github.com/Whoknow77/StudyNote/blob/master/Git/gitbranch.md)
 
-# [VSCode 단축키](js/js.md)
+# [VSCode 단축키](command/command.md)
 
 
 # [JavaScript](https://github.com/Whoknow77/StudyNote/blob/master/js/js.md)
 
 # [SystemProgramming](https://github.com/Whoknow77/StudyNote/blob/master/System/system.md)
+
+
 
   
