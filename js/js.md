@@ -132,8 +132,8 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
          console.log(item,index,arr2[index+1]);
       })
       ```
-         - **출력결과**
-  
+      - **출력결과**
+
          <img src="https://ifh.cc/g/zWCvV7.png">
 
 - ### 추가, 삭제, 결합
