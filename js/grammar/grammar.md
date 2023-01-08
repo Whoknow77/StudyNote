@@ -313,6 +313,10 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
 
       - 위 예제는 학생들의 점수의 평균을 구하는 예제이다.
 
+      - initialValue Optional
+
+         callback의 최초 호출에서 첫 번째 인수에 제공하는 값. 초기값을 제공하지 않으면 **배열의 첫 번째 요소**를 사용합니다. 빈 배열에서 초기값 없이 reduce()를 호출하면 오류가 발생합니다.
+
       - prev : return의 값(curr.score가 누적되서 더해짐)
 
    - ### **sort()**

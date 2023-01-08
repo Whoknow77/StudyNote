@@ -12,7 +12,7 @@ StudyNote(공부하고 기록하는 공간)</h1>
 
 # Git
 
-   - [기본명령어](https://github.com/Whoknow77/StudyNote/blob/master/Git/command.md)
+   - [기본명령어](https://gigthub.com/Whoknow77/StudyNote/blob/master/Git/command.md)
 
    - [원리](https://github.com/Whoknow77/StudyNote/blob/master/Git/gistory.md)
 
