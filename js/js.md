@@ -10,6 +10,8 @@
 
    - ## [비동기 처리](https://github.com/Whoknow77/StudyNote/blob/master/js/Subject.md/async_sync.md)
 
+   - ## [정규표현식](./Subject.md/reg.md)
+
 
    
 
