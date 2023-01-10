@@ -395,3 +395,184 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
    - 여러 줄일 경우, **중괄호** 넣어서 사용해야 함!
 
 ----------------------
+
+## String(문자열) 메소드
+
+- ### charAt
+
+   ```js
+   str.charAt(index);
+   ```
+
+   index에 해당하는 위치의 문자 반환 한다.
+
+- ### indexOf
+
+   ```js
+   str.indexOf('o');
+   str.indexOf('or');
+   ```
+
+   인수로 전달한 문자 또는 문자열을 대상 문자열에서 검색하여 **처음 발견된 곳의 index를 반환**한다.
+
+   발견하지 못한 경우 -1을 반환 한다.
+
+- ### lastIndexOf
+
+   ```js
+   str.lastIndexOf('whoknow'); 
+   str.lastIndexOf()
+   str.lastIndexOf('l', 5);
+   ```
+
+   인수로 전달한 문자 또는 문자열을 대상 문자열에서 검색하여 **마지막으로 발견된 곳의 index 반환** 한다.
+
+   2번째 인수(fromIndex)가 전달되면** 검색 시작 위치를 fromIndex으로 이동**하여 **역방향으로 검색**을 시작한다.
+
+   이때 검색 범위는 0 ~ fromIndex이며 반환값은 indexOf 메소드와 동일하게 발견된 곳의 index이다.
+
+- ### replace
+
+   ```js
+   str.replace(searchValue, replaceValue);
+   ```
+
+   - searchValue : 문자 or 정규표현식
+   - replaceValue : 문자 or 콜백함수
+
+   **원본 문자열은 변경되지 않고 결과가 반영된 새로운 문자열 반환**한다.
+
+   검색된 문자열이 여럿 존재할 경우 **첫번째로 검색된 문자열**만 대체된다.
+
+   - 정규식을 이용한 교체패턴
+
+      ```js
+      .replace(' ','') // 첫번째 공백 제거
+ 
+      .replace(/\-/g,'') // 특정문자 제거1 (-)
+      
+      .replace(/,/g,'') // 특정문자 제거2(,)
+      
+      .replace(/^\s+/,'') // 앞의 공백 제거
+      
+      .replace(/\s+$/,'') // 뒤의 공백 제거
+      
+      .replace(/^\s+|\s+$/g,'') // 앞뒤 공백 제거
+      
+      .replace(/\s/g,'') // 문자열 내의 모든 공백 제거
+      
+      .replace(/\n/g,'') // n개행 제거
+      
+      .replace(/\r/g,'') // 엔터 제거
+      ```
+
+- ### split
+
+   ```js
+   // 공백으로 구분
+   str.split(' ');
+   
+   // 문자를 모두 분리
+   str.split('');
+   
+   // 공백을 기준으로 분리
+   str.split('\/s/');
+
+   // 문자 전체를 단일 요소로 하는 배열 반환
+   str.split(());
+
+   // 공백을 기준으로 최대 3개까지만 분리
+   str.split(' ', 3);
+
+   // 'o'를 기준으로 분리
+   str.split('o'); 
+   ```
+
+   인수로 전달한 **구분자**를 통하여 문자를 분리해 **배열로 반환**한다.
+
+   원본 문자열은 변경되지 않는다.
+
+- ### substring
+
+   ```js
+   str.substring(start,end);
+   ```
+
+   start 인덱스부터 **end인덱스-1** 까지의 문자를 반환한다.
+
+- ### slice
+
+   ```js
+   // 뒤에서 5자리 잘라내 반환
+   str.slice(-5);
+   ```
+   
+   substring()과 동일하지만 
+   기존 substring에서는 음수의 인수를 0으로 취급하였지만, **음수의 인수를 전달**할 수 있다.
+
+- ### toLowerCase(), toUpperCase()
+
+   ```js
+   str.toLowerCase();
+   str.toUpperCase();
+   ```
+
+   소/대 문자로 변경한다.
+
+- ### trim
+
+   ```js
+   str.trim();
+
+   // 앞 쪽만 제거
+   str.trimStart();
+
+   // 뒤 쪽만 제거
+   str.trimEnd();
+   ```
+
+   대상 문자열 양쪽 끝에 있는 **공백 문자를 제거**한 문자열을 반환한다.
+
+- ### repeat
+
+   ```js
+   // 공백 반환
+   str.repeat(0);
+
+   // 'strstr'
+   str.repeat(2);
+   ```
+
+   인수로 전달한 숫자만큼 반복해 연결한 새로운 문자열을 반환한다.
+
+   count가 0이면 빈 문자열을 반환하고 음수이면 RangeError를 발생시킨다.
+
+- ### includes
+
+   ```js
+   str.includes('hello'); // true
+   str.includes('hello', 0); // true
+   str.includes('hello', 2); // false
+   ```
+
+   인수로 전달한 문자열이 포함되어 있는지를 검사하고 결과를 Boolean 값으로 반환한다.
+
+   두번째 인수는 옵션으로 **검색할 위치**를 나타내는 정수이다.
+   
+<br>
+<br>
+
+
+   
+   
+
+      
+
+
+
+
+
+
+## 참고자료
+
+https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-String-%EB%A9%94%EC%86%8C%EB%93%9C-%E2%9C%8F%EF%B8%8F-%EC%A0%95%EB%A6%AC
