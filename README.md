@@ -23,7 +23,7 @@ StudyNote(공부하고 기록하는 공간)</h1>
 # [VSCode 단축키](command/command.md)
 
 
-# [JavaScript](https://github.com/Whoknow77/StudyNote/blob/master/js/js.md)
+# [JavaScript](./js/js.md)
 
 # [SystemProgramming](https://github.com/Whoknow77/StudyNote/blob/master/System/system.md)
 
