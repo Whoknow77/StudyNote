@@ -169,6 +169,29 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
          arr.splice(index, 개수);
          ```
 
+         - **slice vs splice**
+
+            - slice : **원본 배열 수정**하지 않고 새로운 배열 생성
+            - splice : **원본 배열 자체를 수정**
+
+               ```js
+               let s=[1,2,3,4,5];
+               s.splice(0,1);
+               console.log(s); // [2,3,4,5]
+
+
+               let s2=[1,2,3,4,5];
+               s2.slice(0,2);
+               console.log(s2); // [1,2,3,4,5]
+
+               let s3=[1,2,3,4,5];
+               s4=s.slice(0,1);
+               s5=s.slice(0,1);
+               console.log(s4); // [1]
+               console.log(s5); // [1]
+            
+            - =을 통해 할당받은 값은 동일하다.
+
    - **Combine**
 
       - concat
