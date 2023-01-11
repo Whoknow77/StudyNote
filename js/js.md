@@ -14,7 +14,7 @@
 
    - ## [Hoisting](./Subject.md/hoisting.md)
 
-   = ## [소수점연산](./Subject.md/decimal.md)
+   - ## [소수점연산](./Subject.md/decimal.md)
 
    - ## [OOP](./Subject.md/oop.md)
 
