@@ -48,21 +48,16 @@
 ## 브라우저 객체(BOM)이란?
 
 - ### BOM(Browser Object Model)
-    - 자바스크립트가 **브라우저**와 소통하기 위해서 만들어진 모델
-    - DOM은 BOM 중 하나
+    - 웹 브라우저의 기능들을 객체처럼 다루는 모델
     - BOM의 최상위 객체는 **window객체**
 
         | method  |  의미 |
         | ----- | -------------------- |
         | location | 현재 URL에 대한 정보  |
         | navigator | 브라우저명과 버전정보를 속성으로 가짐  |
-        | document | 현재 문서에 대한 정보  |
         | window | 최상위 객체로, 각 프레임별로 하나씩 존재  |
         | history | 현재의 브라우저가 접근했던 URL history  |
         | screen | 브라우저의 외부환경에 대한 정보를 제공  |
-
-    - **DOM은 window 객체의 하위 객체**
-        - window.document 객체를 DOM이라고 분류한다.
 
 
 
@@ -82,6 +77,11 @@
 ## 참고자료
 
 https://www.youtube.com/watch?v=1ojA5mLWts8
+
 https://www.youtube.com/watch?v=mFawNZz_Uu0
+
 http://www.tcpschool.com/javascript/js_dom_concept
+
 https://cbw1030.tistory.com/46
+
+https://blog.makerjun.com/4b093d5d-bd3c-49f4-b65e-f44a675bd5b8
