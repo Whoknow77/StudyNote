@@ -94,9 +94,23 @@
 
     왜냐하면 함수 표현식 형태로 add() 함수가 정의되어 있기 때문이다. **따라서 호이스팅이 일어나지 않는다.**
 
+- ### **let/const vs var**
+
+    - 우선적으로 자바스크립트에서는 **선언만 호이스팅 대상**으로 본다. 즉, 초기화는 호이스팅 대상이 아니다.
+
+    - let/const
+
+        - 호이스팅 대상이지만, 호이스팅 시, 변수를 초기화 하지 않는다.
+
+
+    - var 
+
+        - 호이스팅 대상으로, 호이스팅 시, 변수를 undefined로 초기화 한다.
 <br>
 
 ## 참고문서
 
 https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%8A%A4%EC%BD%94%ED%94%84-%ED%95%A8%EC%88%98-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85
+
+https://developer.mozilla.org/ko/docs/Glossary/Hoisting#%EC%84%A0%EC%96%B8%EB%A7%8C_%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85_%EB%8C%80%EC%83%81
     
