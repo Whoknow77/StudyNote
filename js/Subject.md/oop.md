@@ -121,7 +121,9 @@
 
     4) ### 다형성
 
-        - 같은 형태이지만 다른 기능을 하는 것(**상속**을 통해 구현)
+        <img src="https://i.postimg.cc/Dw07qrWY/image.png">
+
+        - 하나의 클래스나 메소드가 다양한 방식으로 동작이 가능한 것을 의미
 
         - 다형성은 **Overriding**과 **Overroading**을 통해 실현한다.
 
@@ -132,7 +134,7 @@
 
             - **Overroading**
 
-                - 같은 이름의 메서드를 사용하지만 메서드마다 다른 용도로 사용되며 그 결과물도 다르게 구현할 수 있게 만드는 개념
+                - 같은 메소드의 매개변수(parameter)에 따라 다르게 동작한다.
 
                     - 오버로딩이 가능하려면 메서드끼리 이름은 같지만 매개변수의 갯수나 데이터 타입이 다르면 오버로딩이 적용
 
@@ -152,3 +154,6 @@ https://upcake.tistory.com/418
 https://victorydntmd.tistory.com/117
 
 https://inpa.tistory.com/entry/OOP-%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B6%94%EC%83%81%ED%99%94-%EC%84%A4%EA%B3%84%EC%9D%98-%EC%9D%B4%ED%95%B4
+
+http://www.jidum.com/jidums/view.do?jidumId=951
+
