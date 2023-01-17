@@ -24,7 +24,9 @@
 
    - ## [이벤트 핸들러](./Subject.md/listen.md)
 
-   - ## [이벤트 위임](./Subject.md/delegate.md)
+   - ## [이벤트 버블링 & 이벤트 위임](./Subject.md/delegate.md)
+
+   - ## [call, apply, bind](./Subject.md/cab.md)
 
 
    
