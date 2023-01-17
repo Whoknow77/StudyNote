@@ -22,7 +22,9 @@
 
    - ## [Web API](./Subject.md/webapi.md)
 
-   - ## [이벤트 리스너](./Subject.md/listen.md)
+   - ## [이벤트 핸들러](./Subject.md/listen.md)
+
+   - ## [이벤트 위임](./Subject.md/delegate.md)
 
 
    
