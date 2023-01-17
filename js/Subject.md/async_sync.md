@@ -18,7 +18,7 @@
 
    - **콜백 함수란?**
 
-      1. **다른 함수의 인자로써 이용되는 함수.**
+      1. **다른 함수의 인자로써 이용되는 함수.** 
 
       2. 어떤 이벤트에 의해 호출되어지는 함수.
 
@@ -29,6 +29,8 @@
       }, 1000);
       console.log('3');
       ```
+
+      -  여기서 setTimeout은 비동기 함수로 인자로 0이 들어가도 비동기처리를 한다.
       
    - **필요성**
 
@@ -49,7 +51,7 @@
       repeatYesCallback(5, print);
 
       // 콜백 X
-      <!-- function repeatNoCallback(num) {
+      function repeatNoCallback(num) {
       for (let i = 0; i < num; i++) {
          print("hello world");
       }
@@ -59,7 +61,7 @@
          console.log(string);
       }
 
-      repeatNoCallback(5); -->
+      repeatNoCallback(5);
       ```
       - **추상화**가 가능하다.
 
@@ -72,7 +74,7 @@
 
             외부에서 로직의 일부분을 함수로 전달받아 수행하므로 더욱 유연한 구조를 가지게 된다.
 
-      - **비동기(Asynchronous) 처리 방식의 문제점을 해결**할 수 있습니다.
+      - **비동기(Asynchronous) 처리 방식의 문제점을 해결**할 수 있습니다 => 순차적 처리를 위해 사용한다.
 
       ```js
       // 콜백 X
@@ -120,9 +122,6 @@
 
       결과값을 바로 리턴받지 않고, 그 결과값을 통해 처리할 로직을 **콜백 함수**로 넘겨서 제대로 구현을 하였다.
       
-
-
-
    - **단점**
 
       - **콜백지옥** / **콜백체인**
@@ -187,7 +186,7 @@
    - ### **정의**
 
       - 비동기를 간편하게 처리할 수 있도록 도와주는 Object
-      - 정상적으로 기능이 수행되면 성공의 메시지롸 함께 처리된 결과를, 아닐 시 에러를 전달함
+      - 정상적으로 기능이 수행되면 성공의 메시지와 함께 처리된 결과를, 아닐 시 에러를 전달함
       - 콜백지옥을 해결함
 
 
@@ -206,8 +205,8 @@
          console.log('doing something');
 
          setTimeout(()=>{
-            //resolve('whonkow');
-            reject(new Error('no network'));
+            resolve('whonkow');
+            // reject(new Error('no network'));
          },2000);
       });
 
@@ -248,6 +247,22 @@
 
       - then은 값을 전달하거나, **Promise**를 전달할 수 있다.
       - **Promise Channing**이 가능하다.
+
+   - ### All vs Race
+
+      <img src="https://i.postimg.cc/XNDwrQdW/image.png" height="400">
+
+      - **All**
+
+         - **가장 늦게** 끝나는 함수가 끝나면 다음 작업이 시작됨
+
+         - 콜백함수의 파라미터로 **각각 프로미스의 실행결과를 배열**로 담고있다.
+
+      - **Race**
+
+         - **가장 빨리** 끝나는 함수가 끝나면 나머지는 버리고 다음 작업을 실행한다.
+
+         - 콜백함수의 파라미터로 **가장 빨리 끝난 프로미스의 실행결과**를 담고 있다.
 
 ## **async & await**
 
@@ -316,5 +331,7 @@ https://www.youtube.com/watch?v=s1vpVCrT8f4&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
 https://thoughtprovo-king.tistory.com/92
 
 https://ko.javascript.info/async-await
+
+https://www.youtube.com/watch?v=TAyLeIj1hMc&list=PLuHgQVnccGMBVQ4ZcIRmcOeu8uktUAbxI&index=1
 
 -------------------------------------------
