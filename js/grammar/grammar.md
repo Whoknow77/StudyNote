@@ -301,7 +301,7 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
       const result= students.filter((student) => students.enrolled);
       ```
 
-       - 콜백함수의 조건식을 만족시키는 아이템들로만 구성된 **배열**을 반환한다.
+       - 만족하는 모든 요소를 배열로 반환한다.
 
    - ### **map()**
 
@@ -310,7 +310,7 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
       console.log(result);
       ```
 
-      - 콜백함수의 조건에 맞게 **정보를 뽑거나 변형된 배열**을 반환한다.
+      - 함수를 받아 특정 기능을 시행하고 새로운 배열을 반환한다.
 
    - ### **some() & every()**
 
@@ -325,7 +325,7 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
       - **some** : 조건식을 만족시키는 아이템이 **하나라도** 있으면 True 반환, find와 동일한 로직
       - **every** : 조건식을 **모두** 만족시켜야 True 반환
 
-   - ### **recude()**
+   - ### **reduce()**
 
       ```js
       const result = students.reduce((prev, curr)=>{
@@ -350,6 +350,8 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
          const num=[4,2,3,1,5];
          console.log(num.sort((a,b) => a-b));
          ```
+
+         배열 자체가 변경되니 주의 해야한다.
 
 ------------------------
       
@@ -521,17 +523,31 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
    str.substring(start,end);
    ```
 
-   start 인덱스부터 **end인덱스-1** 까지의 문자를 반환한다.
+   start와 end사이의 문자열을 반환한다.
+
+   start와 end를 바꿔도 동작한다.
 
 - ### slice
 
    ```js
    // 뒤에서 5자리 잘라내 반환
    str.slice(-5);
+   str.slice(1,4);
    ```
+
+   start부터 end-1까지 반환
    
    substring()과 동일하지만 
    기존 substring에서는 음수의 인수를 0으로 취급하였지만, **음수의 인수를 전달**할 수 있다.
+
+- ### substr
+
+   ```js
+   str.substr(2,4);
+   str.substr(-4,2);
+   ```
+
+   n부터 시작해서 m개를 가져온다. 
 
 - ### toLowerCase(), toUpperCase()
 
@@ -599,3 +615,5 @@ https://www.youtube.com/watch?v=1Lbr29tzAA8&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6
 ## 참고자료
 
 https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-String-%EB%A9%94%EC%86%8C%EB%93%9C-%E2%9C%8F%EF%B8%8F-%EC%A0%95%EB%A6%AC
+
+https://www.youtube.com/watch?v=pJzO6O-aWew&list=PLZKTXPmaJk8JZ2NAC538UzhY_UNqMdZB4&index=7

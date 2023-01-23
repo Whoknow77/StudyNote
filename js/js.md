@@ -28,6 +28,12 @@
 
    - ## [call, apply, bind](./Subject.md/cab.md)
 
+   - ## [Closure](./Subject.md/closure.md)
+
+   - ## [ES6 문법](./Subject.md/es6.md)
+
+   - ## [디자인 패턴](./Subject.md/pattern.md)
+
 
    
 
