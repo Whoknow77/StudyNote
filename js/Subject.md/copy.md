@@ -143,11 +143,6 @@ console.log(origin.b.c === copy.b.c) // false
 
 이 외에도 재귀 함수를 통하여 깊은 복사를 구현하는 방법도 있다.
 
-
-
-
-
-## 얕은복사
 ## 참고자료
 
 https://hanamon.kr/javascript-shallow-copy-deep-copy/
