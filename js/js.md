@@ -34,6 +34,8 @@
 
    - ## [디자인 패턴](./Subject.md/pattern.md)
 
+   - ## [객체 복사](./Subject.md/copy.md)
+
 
    
 
