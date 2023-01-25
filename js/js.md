@@ -20,21 +20,21 @@
 
    - ## [Window, DOM, BOM](./Subject.md/dom.md)
 
-   - ## [Web API](./Subject.md/webapi.md)
-
    - ## [이벤트 핸들러](./Subject.md/listen.md)
 
    - ## [이벤트 버블링 & 이벤트 위임](./Subject.md/delegate.md)
 
    - ## [call, apply, bind](./Subject.md/cab.md)
 
-   - ## [Closure](./Subject.md/closure.md)
-
    - ## [ES6 문법](./Subject.md/es6.md)
 
    - ## [디자인 패턴](./Subject.md/pattern.md)
 
    - ## [객체 복사](./Subject.md/copy.md)
+
+   - ## [Ajax](./Subject.md/ajax.md)
+
+   - ## [Closure](./Subject.md/closure.md)
 
 
    
