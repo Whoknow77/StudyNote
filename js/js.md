@@ -37,6 +37,9 @@
    - ## [Closure](./Subject.md/closure.md)
 
 
+   - ## [Partial Application & Currying](./Subject.md/pnc.md)
+
+
    
 
 
