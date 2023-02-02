@@ -72,6 +72,50 @@
 
   - ## 함수 컨텍스트
 
+    ```js
+    'say 컨텍스트': {
+      변수객체: {
+        arguments: null,
+        variable: ['name'], // 초기화 후 [{ name: 'nero' }]가 됨
+      },
+      scopeChain: ['say 변수객체', '전역 변수객체'],
+      this: window,
+    }
+    ```
+
+    `say` 호출 후에 위에서부터 차례대로 실행한다.
+
+    (8) : `variable`의 `name`에 'nero'를 대입한다.
+
+    (9) : `say` 컨텍스트 안의 `name`을 출력한다.
+
+    (10) : `wow` 함수는 `say` 컨텍스트에서 찾을 수가 없다. => Scope Chain을 따라 상위 변수객체인 전역 변수객체에서 `variable`의 `wow` 함수를 호출한다.
+
+    ```js
+    'wow 컨텍스트': {
+      변수객체: {
+        arguments: [{ word : 'hello' }],
+        variable: null,
+      },
+      scopeChain: ['wow 변수객체', '전역 변수객체'],
+      this: window,
+    }
+    ```
+
+    여기서 제일 중요한 점은 `say` 함수 안에서 `wow` 함수가 호출되었다고 `scopechain`에 `say` 변수객체가 들어가는 것이 절대 아니다.
+
+    정적 스코프답게 자기 자신인 `wow` 변수객체와 **전역 변수객체**가 들어간다.
+
+    (10) : `wow`는 `arguments`에서 찾고, `name`은 `scopechain`을 따라 전역 변수객체에서 찾는다.
+
+    따라서 'hello nero'가 아닌 'hello zero'가 콘솔에 찍힌다.
+
+    `wow` 함수 종료 후 `wow`컨텍스트가 사라지고, `sys`함수의 실행이 마무리된다.
+
+    `say` 함수 종료후 `say`컨텍스트가 사라지고, 마지막으로 전역 컨텍스트도 사라진다.
+
+  ### **이렇게 모든 것이 논리적인 실행 컨텍스트 개념을 이해하는 것은 자바스크립트 전반을 이해하는데 매우 중요하다.**
+
 ## 참고자료
 
 https://www.zerocho.com/category/JavaScript/post/5741d96d094da4986bc950a0
