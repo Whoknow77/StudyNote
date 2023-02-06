@@ -2,15 +2,133 @@
 
 자바스크립트를 위한 코드 스타일부터 습관 그리고 클린 코드에 대해 함께 고민해보고 그 이유에 대해 탐구하고 또 학습해보는 시간을 가집니다.
 
+## 변수 다루기
+
+- ### 임시변수 제거하기
+
+  명령형으로 가득한 로직은 나중에 유지보수를 해야 할 때 추가적인 코드를 작성하고 싶게 유혹을 한다.
+
+  해결책으로는
+
+  1. 함수나누기
+  2. 바로 반환
+  3. 고차함수
+  4. 선언형으로 바꾸기
+
+  등이 있다.
+
+  ```js
+  function getElements() {
+    const result = {}; // 임시 객체
+
+    result.title = document.querySelector(".title");
+    result.text = document.querySelector(".text");
+    result.value = document.querySelector(".value");
+
+    return result;
+  }
+  ```
+
+  다음의 코드를 유지보수 하거나 남이 볼때 `result`라는 임시 객체를 통해 뭔가 추가하고 싶어지는 유혹에 빠질 수 있다.
+
+  ```js
+  function getElements() {
+    return {
+      title: document.querySelector(".title"),
+      text: document.querySelector(".text"),
+      value: document.querySelector(".value"),
+    };
+  }
+  ```
+
+  따라서 위의 코드와 같이 함수의 이름에 걸맞게 오직 DOM 엘리먼트를 가져와서 반환만 하는 역할을 한다.
+
 ## 타입 다루기
+
+- ### 타입검사
+
+  자바스크립트 Primitive 타입과 Reference 타입이 존재한다.
+
+  - Primitive
+
+    - Boolean
+    - number
+    - String
+    - **null**
+    - **undefined**
+
+  - Reference
+
+    - array
+    - function
+    - object
+
+    이런 타입들을 검사하는 함수로 `typeof`가 존재한다.
+
+    ```js
+    class MyClass {}
+    const str = new String("문자열");
+
+    typeof Myclass; // function
+    typeof str; // object
+    typeof null; // object
+    ```
+
+    Primitive 타입을 검사할때 이 함수를 쓰는건 대부분의 경우 문제가 없지만, Reference 타입을 검사할때는 문제가 발생한다.
+
+    또한 null 값도 object로 object로 인식하는 것을 볼 수 있다.
+
+    타입을 검사하는 함수로 또 다른 것이 있는데 `instance of`이다.
+
+    ```js
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    const poco = new Person("poco", 99);
+
+    console.log(poco instanceof Person); // true
+    ```
+
+    이 외에도 `wrapper` 객체를 구별할 수 있는 것이 prototype에 존재한다.
+
+    이와같이 자바스크립트의 타입은 동적인 타입이므로 타입검사가 어려우므로 조심해서 사용해야 한다.
+
+- ### 형변환 주의하기
+
+  `parseInt` 함수는 두번째 인자를 꼭 명시해서 사용하자.
+
+  ```js
+  parseInt("9.99");
+  ```
+
+  보통 이렇게 많이 사용하는데 반드시 String을 10진수로 변환하는 것이 아니기 때문에,
+
+  ```js
+  parseInt("9.99", 10);
+  ```
+
+  진수를 명시해 줘야 한다.
+
+- ### isNaN
+
+  `isNaN` = is Not A Number => 숫자가 아니라는 뜻이므로 사용자가 사용할때마다 헷갈린다.
+
+  ```js
+  console.log(isNaN(123 + "테스트")); // true
+  console.log(Number.isNaN(123 + "테스트")); // false
+  ```
+
+  **느슨한 검사**였던 `isNaN` 대신에 **엄격한 검사**인 `Number.isNaN`을 이용하면 헷갈리지 않고 한눈에 숫자인지 아닌지 확인할 수 있다.
 
 ## 경계 다루기
 
 ## 분기 다루기
 
-JavaScript에서, 참 같은 값(Truthy)인 값이란 불리언을 기대하는 문맥에서 true로 평가되는 값이다. 따로 거짓 같은 값으로 정의된 값이 아니면 모두 참 같은 값으로 평가된다. (예: false, 0, -0, 0n, "", null, undefined와 NaN 등)
-
 - ### Truthy & Falsy
+
+  JavaScript에서, 참 같은 값(Truthy)인 값이란 불리언을 기대하는 문맥에서 true로 평가되는 값이다. 따로 거짓 같은 값으로 정의된 값이 아니면 모두 참 같은 값으로 평가된다. (예: false, 0, -0, 0n, "", null, undefined와 NaN 등)
 
   ```js
   function printName(name) {
@@ -50,7 +168,7 @@ JavaScript에서, 참 같은 값(Truthy)인 값이란 불리언을 기대하는 
     }
     ```
 
-    다음과 같은 코드를 줄이려고 하면 어떻게 줄이는 것이 좋을까?
+    위와 같은 코드를 줄이려고 하면 어떻게 줄이는 것이 좋을까?
 
     ```js
     function fetchData() {
@@ -400,6 +518,161 @@ JavaScript에서, 참 같은 값(Truthy)인 값이란 불리언을 기대하는 
   따라서 `find`, `findIndex` `every`, `some` 같은 배열 내장함수를 이용하는 것이 좋다.
 
 ## 객체 다루기
+
+- ### Lookup Table
+
+  key : value 조합의 테이블을 말한다.
+
+  ```js
+  function getUserType(type) {
+    switch (key) {
+      case "ADMIN":
+        return "관리자";
+      case "INSTRUCTOR":
+        return "강사";
+      case "STUDENT":
+        return "수강생";
+      default:
+        return "해당 없음";
+    }
+  }
+  ```
+
+  위의 코드에 Lookup Table을 적용해보자.
+
+  ```js
+  function getUserType(type) {
+    const USER_TYPE = {
+      ADMIN: "관리자",
+      INSTRUCTOR: "강사",
+      STUDENT: "수강생",
+    };
+
+    return USER_TYPE[type] || "해당 없음";
+  }
+  ```
+
+  key : value 값을 활용해 코드를 명시적으로 작성하였고, 수정할때도 용이하다.
+
+- ### Object Destructing
+
+  ```js
+  function Person({ name, age, location }) {
+    this.name = name;
+    this.age = age;
+    this.location = location;
+  }
+  const poco = new Person("poco", 30, "korea");
+  ```
+
+  위의 코드의 문제점은 함수 호출시에 인수의 순서를 지켜야 한다는 점, 중간에 인수가 빠지면 예측한 결과와 다르게 나온다는 점이다.
+
+  ```js
+  const poco = new Person({
+    name: "poco",
+    age: "30",
+    location: "korea",
+  });
+  ```
+
+  하지만 이런식으로 사용한다면 순서에도 구애받지 않고, 중간에 값이 없어도 옳은 결과를 출력한다.
+
+  <br/>
+  <br/>
+  <br/>
+
+  ```js
+  const orders = ["Fist", "Second", "Third"];
+  const [st3, , rd3] = orders;
+  ```
+
+  보통 이런식으로 구조 분해 할당을 이용하지만 객체를 사용하면 더 편리하다.
+
+  ```js
+  const orders = ["Fist", "Second", "Third"];
+  const { 0: st, 2: rd } = orders;
+  ```
+
+  배열 안의 데이터가 많아진다면 `,`가 늘어나 가독성이 떨어지는데 이런 경우 객체를 이용해보자.
+
+- ### Object.freeze
+
+  말그대로 객체를 동결하여 객체의 값을 변동하지 못하도록 한다.
+
+  ```js
+  const STATUS = Object.freeze({
+    PENDING: "PEDING",
+    OPTIONS: {
+      GREEN: "GREEN",
+      RED: "RED",
+    },
+  });
+
+  console.log(Object.isFrozen(STATUS));
+  console.log(Object.isFrozen(STATUS.PENDING));
+  console.log(Object.isFrozen(STATUS.OPTIONS));
+  ```
+
+  복사에는 Deep Copy, Shallow Copy가 있듯이 freeze에도 Deep freeze, Shallow freeze가 존재하여 1차원 까지만 **freeze** 된 상태임을 볼 수 있다.
+
+  해결방법으로는
+
+  1. lodash
+  2. 유틸함수생성
+  3. TypeScript => readonly
+
+  등이 있다.
+
+- ### Prototype 조작 지양
+
+  1. 이미 JS는 많이 발전했다.
+  2. JS 빌트인 객체를 건들지 않는다.
+
+  위의 두가지 이유 등으로 인해 지양해야 하는데 자바스크립트는 런타임때 동작되는 것들을 바꿀 수 있기 때문에 예측하지 못한 오류가 발생할 수 있기 때문이다.
+
+  따라서 Prototype을 건드는 대신에 직접 함수를 만들어서 모듈화하고 그것을 배포하자.
+
+- ### hawOwnProperty
+
+  ```js
+  const person = {
+    name: "whoknow",
+  };
+
+  console.log(person.hasOwnProperty("name")); // true
+  ```
+
+  객체가 속성을 가지고 있는지 판단할 때 사용한다.
+
+  ```js
+  const person = {
+    hasOwnProperty: function () {
+      return "hasOwnproperty";
+    },
+    name: "whoknow",
+  };
+
+  console.log(person.hasOwnProperty("name")); // hasOwnproperty
+  ```
+
+  하지만 `let`, `const` 같은 변수들과 다르게 보호를 받지 못한다.
+
+  ```js
+  function hasOwnProp(targetObj, targetProp) {
+    return Object.prototype.hasOwnProperty.call(targetObj, targetProp);
+  }
+
+  const person = {
+    hasOwnProperty: function () {
+      return "hasOwnproperty";
+    },
+    name: "whoknow",
+  };
+
+  console.log(hasOwnProp(person, "name")); // true
+  ```
+
+  따라서 `prototype`에 접근해 `call` 함수를 통해 사용하면 문제를 해결할 수 있다.
 
 ## 함수 다루기
 
