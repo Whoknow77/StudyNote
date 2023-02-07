@@ -1,41 +1,43 @@
 # 관련주제
 
-- ## [Async vs Defer](./Subject.md/async_defer.md)
+- ## [Async vs Defer](./async_defer.md)
 
-- ## [Getter & Setter](./Subject.md/getter_setter.md)
+- ## [Getter & Setter](./getter_setter.md)
 
-- ## [JSON](./Subject.md/json.md)
+- ## [JSON](./json.md)
 
-- ## [비동기 처리](./Subject.md/async_sync.md)
+- ## [비동기 처리](./async_sync.md)
 
-- ## [정규표현식](./Subject.md/reg.md)
+- ## [정규표현식](./reg.md)
 
-- ## [Hoisting](./Subject.md/hoisting.md)
+- ## [Hoisting](./hoisting.md)
 
-- ## [소수점연산](./Subject.md/decimal.md)
+- ## [소수점연산](./decimal.md)
 
-- ## [OOP](./Subject.md/oop.md)
+- ## [OOP](./oop.md)
 
-- ## [Window, DOM, BOM](./Subject.md/dom.md)
+- ## [Window, DOM, BOM](./dom.md)
 
-- ## [이벤트 핸들러](./Subject.md/listen.md)
+- ## [이벤트 핸들러](./listen.md)
 
-- ## [이벤트 버블링 & 이벤트 위임](./Subject.md/delegate.md)
+- ## [이벤트 버블링 & 이벤트 위임](./delegate.md)
 
-- ## [call, apply, bind](./Subject.md/cab.md)
+- ## [call, apply, bind](./cab.md)
 
-- ## [ES6 문법](./Subject.md/es6.md)
+- ## [ES6 문법](./es6.md)
 
-- ## [디자인 패턴](./Subject.md/pattern.md)
+- ## [디자인 패턴](./pattern.md)
 
-- ## [객체 복사](./Subject.md/copy.md)
+- ## [객체 복사](./copy.md)
 
-- ## [Ajax](./Subject.md/ajax.md)
+- ## [Ajax](./ajax.md)
 
-- ## [Scope](./Subject.md/scope.md)
+- ## [Scope](./scope.md)
 
-- ## [실행 컨텍스트](./Subject.md/context.md)
+- ## [실행 컨텍스트](./context.md)
 
-- ## [Closure](./Subject.md/closure.md)
+- ## [Closure](./closure.md)
 
-- ## [Partial Application & Currying](./Subject.md/pnc.md)
+- ## [Partial Application & Currying](./pnc.md)
+
+- ## [디바운싱 & 쓰로틀링](./debouncethrottle.md)
