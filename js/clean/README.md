@@ -676,6 +676,185 @@
 
 ## 함수 다루기
 
+- ### 함수, 메소드, 생성자
+
+  - 자바스크립트 에서의 함수
+
+    - 변수나, 데이터에 담길 수 있다.
+    - 매개변수로 전달 가능(콜백 함수)
+    - 함수가 함수를 반환(고차함수)
+
+  - 종류
+
+    - 일반 함수
+
+      ```js
+      function Func() {
+        return this;
+      }
+      ```
+
+    - 객체의 메소드
+
+      ```js
+      const obj - {
+        method(){
+          return this;
+        },
+      }
+      ```
+
+    - 생성자 함수(Class)
+
+      ```js
+      function Func() {
+        return this;
+      }
+
+      // ES5 이전
+
+      class Func {
+        constructor() {}
+      }
+      ```
+
+    위의 세종류의 함수의 쓰임이 모두 다르므로 구분해서 잘 사용하자.
+
+- ### Rest parameters
+
+  ```js
+  function sumTotal() {
+    return Array.from(arguments).reduce((acc, curr) => acc + curr);
+  }
+
+  sumTotal(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+  ```
+
+  가변 인자를 다룰때 `arguments`를 사용한 코드이다.
+
+  ```js
+  function sumTotal(...args) {
+    return args.reduce((acc, curr) => acc + curr);
+  }
+  ```
+
+  `...` 연산자를 활용해서 Array.from, arguments를 사용하지 않아도 배열의 내장 함수를 사용할 수 있다,
+
+  ```js
+  function sumTotal(initValue, ...args) {
+    console.log(initValue); // 1
+    return args.reduce((acc, curr) => acc + curr);
+  }
+  ```
+
+  또한 다른 매개변수와 조합이 가능하다. 하지만 나머지 매개변수(...)는 마지막에 위치해야 한다.
+
+- ### 화살표 함수
+
+  ```js
+  const user = {
+    name: "Poco",
+    getName: () => {
+      return this.name;
+    },
+  };
+
+  console.log(user.getName()); // undefined
+  ```
+
+  위의 코드는 문제가 없어보이지만 undefined를 반환한다.
+
+  ```js
+  const user = {
+    name: "Poco",
+    getName: function () {
+      return this.name;
+    },
+  };
+  console.log(user.getName()); // Poco
+  ```
+
+  화살표 함수가 아닌 일반 함수로 작성하니 잘 작동한다.
+
+  왜 화살표 함수에서는 name값을 잘못 받아오는 것일까?
+
+  화살표 함수는 **Lexical Scope**를 따르지만 화살표 함수 특성상 자신의 `this`가 존재 하지 않으므로 호출된 `user`객체를 `this`로 참조하는 것이 아니라 상위 렉시컬 범위를 찾기 때문이다.
+
+  따라서 전역 범위에 `user`는 존재하지 않아 undefined 를 반환한 것이다.
+
+  추가적으로 call, apply, bind 등의 함수와 arguments도 사용이 불가능하다.
+
+  물론 arguments의 경우는 Rest parameter로 해결이 가능하다.
+
+- ### 순수함수
+
+  순수함수란 어떤 함수에 동일한 인자를 주었을 때 항상 같은 값을 리턴하는 함수와 외부의 상태를 변경하지 않는 함수를 말한다.
+
+  ```js
+  const obj = { one: 1 };
+  function changeObj(targetObj) {
+    targetObj.one = 100;
+    return targetObj;
+  }
+  console.log(changeObj(obj)); // one : 100
+  console.log(obj); // one : 100
+  ```
+
+  함수를 호출한 후 의도치 않게 **원래의 값**이 **변경**된 모습이다.
+
+  **객체, 배열**은 **reference type**으로 이 경우에는 **새롭게 만들어서 반환**해야 한다.
+
+  ```js
+  const obj = { one: 1 };
+
+  function changeObj(targetObj) {
+    return { ...targetObj, one: 100 };
+  }
+  console.log(changeObj(obj)); // one : 100
+  console.log(obj); // one : 1
+  ```
+
+  `...` 연산자를 통해 새로운 객체를 만들어서 반환할 수 있고, `Object.assign()`를 사용해도 가능하다.
+
+  순수함수를 만들지 않을 경우 무서운 경우가 발생할 일이 있으므로
+  의식적으로 순수함수를 만들자.
+
+- ### Closure
+
+  클로저에 대한 자세한 설명 ==> [클로저](./../Subject.md/closure.md)
+
+  - 클로저 활용 예시
+
+    ```js
+    const arr = [1, 2, 3, "A", "B", "C"];
+
+    const isNumber = (value) => typeof value === "number";
+    const isString = (value) => typeof value === "string";
+
+    console.log(arr.filter(isNumber)); // [1, 2, 3]
+    console.log(arr.filter(isString)); // ['A', 'B', 'C']
+    ```
+
+    위의 코드에 클로저를 적용해보자.
+
+    ```js
+    const arr = [1, 2, 3, "A", "B", "C"];
+
+    function isTypeOf(type) {
+      return function (value) {
+        return typeof value === type;
+      };
+    }
+
+    const isNumber = isTypeOf("number");
+    const isString = isTypeOf("string");
+
+    console.log(arr.filter(isNumber)); // [1, 2, 3]
+    console.log(arr.filter(isString)); // ['A', 'B', 'C']
+    ```
+
+    클로저를 이용해 리팩토링한 결과이다.
+
 ## 참고자료
 
 https://www.udemy.com/course/clean-code-js/?utm_source=adwords&utm_medium=udemyads&utm_campaign=JavaScript_Search_la.KR_cc.KR&utm_term=_._
