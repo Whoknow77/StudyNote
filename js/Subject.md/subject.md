@@ -42,4 +42,4 @@
 
 - ## [디바운싱 & 쓰로틀링](./debouncethrottle.md)
 
-= ## [객체지향](./oopp.md)
+- ## [객체지향](./oopp.md)
