@@ -14,7 +14,7 @@
 
 - ## [소수점연산](./decimal.md)
 
-- ## [OOP](./oop.md)
+- ## [OOP 이론](./oop.md)
 
 - ## [Window, DOM, BOM](./dom.md)
 
@@ -41,3 +41,5 @@
 - ## [Partial Application & Currying](./pnc.md)
 
 - ## [디바운싱 & 쓰로틀링](./debouncethrottle.md)
+
+= ## [객체지향](./oopp.md)
