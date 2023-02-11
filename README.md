@@ -20,6 +20,8 @@ StudyNote(공부하고 기록하는 공간)</h1>
 
 # [VSCode 단축키](command/command.md)
 
+# [CSS](./css/README.md)
+
 # [JavaScript](./js/js.md)
 
 # [React](./React/README.md)
