@@ -574,3 +574,513 @@ setNextId(nextId + 1);
 만약 배열을 그대로 넘기면 `setTopics`함수가 인자로 받은 값이 원본 값인지 아닌지 판단하여, **원본 값일 경우 렌더링을 하지 않기 때문**에 아무 변화가 일어나지 않는다.
 
 따라서 인자값이 `primitive` 값이 아닌 `reference`타입일 경우 복사를 해줘서 넘겨야 한다.
+
+## Update(가장 난이도가 높음)
+
+<img src="./update.gif" height="300" width="500">
+
+```js
+import { useState } from "react";
+
+function Header(props) {}
+
+function Nav(props) {}
+
+function Article(props) {}
+
+function Create(props) {}
+
+function Update(props) {
+  const [title, setTitle] = useState(props.title); // state로 환승(내부에서 변경하기 위해)
+  const [body, setBody] = useState(props.body);
+  return (
+    <article>
+      <h2>Update</h2>
+      <form
+        onSubmit={(event) => {
+          // 폼을 제출하였을때 발생하는 이벤트
+          event.preventDefault();
+          const title = event.target.title.value;
+          const body = event.target.body.value;
+          props.onUpdate(title, body);
+        }}
+      >
+        <p>
+          <input
+            type="text"
+            name="title"
+            placeholder="title"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          />
+        </p>
+        <textarea
+          name="body"
+          placeholder="body"
+          value={body}
+          onChange={(event) => {
+            setBody(event.target.value);
+          }}
+        ></textarea>
+        <p>
+          <input type="submit" value="Update"></input>
+        </p>
+      </form>
+    </article>
+  );
+}
+
+function App() {
+  const [mode, setMode] = useState("WELCOME");
+  const [id, setId] = useState(null);
+  const [nextId, setNextId] = useState(4);
+  const [topics, setTopics] = useState([
+    // state로 승격
+    { id: 1, title: "html", body: "html is ..." },
+    { id: 2, title: "css", body: "css is ..." },
+    { id: 3, title: "javascript", body: "javascript is ..." },
+  ]);
+  let content = null;
+  let contextControl = null; // mode가 'READ'일때만
+  if (mode === "WELCOME") {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === "READ") {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = <Article title={title} body={body}></Article>;
+    contextControl = (
+      <li>
+        <a
+          href={"/update" + id}
+          onClick={(event) => {
+            event.preventDefault();
+            setMode("UPDATE");
+          }}
+        >
+          Update
+        </a>
+      </li>
+    );
+  } else if (mode === "CREATE") {
+    content = (
+      <Create
+        onCreate={(_title, _body) => {
+          const newTopic = { id: nextId, title: _title, body: _body };
+          const newTopics = [...topics];
+          newTopics.push(newTopic);
+          setTopics(newTopics); // reference 타입은 복사해서 넘기기
+          setId(nextId);
+          setMode("READ");
+          setNextId(nextId + 1);
+        }}
+      ></Create>
+    );
+  } else if (mode === "UPDATE") {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = (
+      <Update
+        title={title}
+        body={body}
+        onUpdate={(title, body) => {
+          const newTopics = [...topics];
+          const updatedTopic = { id: id, title: title, body: body };
+          for (let i = 0; i < newTopics.length; i++) {
+            if (newTopics[i].id === id) {
+              newTopics[i] = updatedTopic;
+              break;
+            }
+          }
+          setTopics(newTopics);
+          setMode("READ");
+        }}
+      ></Update>
+    );
+  }
+
+  return (
+    <div>
+      <Header
+        title="REACT"
+        onChangeMode={() => {
+          setMode("WELCOME");
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          setMode("READ");
+          setId(id);
+        }}
+      ></Nav>
+      {content}
+      <li>
+        <a
+          href="/create"
+          onClick={(event) => {
+            event.preventDefault();
+            setMode("CREATE");
+          }}
+        >
+          Create
+        </a>
+      </li>
+      {contextControl}
+    </div>
+  );
+}
+export default App;
+```
+
+`Update` 폼은 기존의 데이터기반으로 수정을 해야 하니까 기존의 데이터를 가지고 있어야한다. 이 데이터는 `App`함수의 READ를 읽어와 `props`로 넘긴다.
+
+이제 각 li 태그를 누르고 update 클릭 시 본문 내용이 저절로 뜬다.
+
+하지만 수정이 불가능하다.
+
+`props` 값은 메인이 되는 유저가 컴포넌트에 내린 어명과도 같기 때문에 바꿀수가 없다.
+
+따라서 props를 **state**로 환승해야 한다.
+
+```
+props : 사용자가 내부로 전달하는 값
+state : 내부자가 사용 하는 데이터, 내부에서 변경 가능
+```
+
+하지만 이렇게 해도 여전히 변경되지 않는다.
+
+html에서 `onChange`는 값이 입력되고, 마우스가 바깥으로 나가야 이벤트가 발생되지만 리액트에서는 **값을 입력할때마다** 이벤트가 발생함
+
+입력할때마다 `setTitle`함수가 실행되고 그때마다 컴포넌트가 다시 랜더링되면서 새로운 값이 `value`에 할당되는 방식이다.
+
+이후에 `Update` 버튼을 클릭하면 `onSubmit`을 호출되고, `title`과 `body`값을 `onUpdate`로 전달한다.
+
+`id`값은 READ할때 이미 세팅이 되어있기 때문에 그대로 쓴다.
+
+## Delete
+
+<img src="./delete.gif">
+
+```js
+contextControl = (
+  <>
+    <li>
+      <a
+        href={"/update" + id}
+        onClick={(event) => {
+          event.preventDefault();
+          setMode("UPDATE");
+        }}
+      >
+        Update
+      </a>
+    </li>
+    <li>
+      <input
+        type="button"
+        value="Delete"
+        onClick={() => {
+          const newTopics = [];
+          for (let i = 0; i < topics.length; i++) {
+            if (topics[i].id !== id) {
+              newTopics.push(topics[i]);
+            }
+          }
+          setTopics(newTopics);
+          setMode("WELCOME");
+        }}
+      />
+    </li>
+  </>
+);
+```
+
+`Delete` 버튼을 누를 시 현재 선택된 id와 같은 id를 가진 topics만 빼고 `newTopic`에 할당하였다.
+
+### 완성된 전체 코드
+
+```js
+import { useState } from "react";
+
+function Header(props) {
+  return (
+    <header>
+      <h1>
+        <a
+          href="/"
+          onClick={function (event) {
+            event.preventDefault();
+            props.onChangeMode();
+          }}
+        >
+          {props.title}
+        </a>
+      </h1>
+    </header>
+  );
+}
+
+function Nav(props) {
+  const lis = [];
+  for (let i = 0; i < props.topics.length; i++) {
+    let t = props.topics[i];
+    lis.push(
+      // 자동으로 생성한 태그의 경우에는 태그들을 키 값을 추적해야함으로써 성능을 높인다.
+      <li key={t.id}>
+        <a
+          id={t.id}
+          href={"/read/" + t.id}
+          onClick={(event) => {
+            event.preventDefault();
+            props.onChangeMode(Number(event.target.id));
+          }}
+        >
+          {t.title}
+        </a>
+      </li>
+    );
+  }
+  return (
+    <nav>
+      <ol>{lis}</ol>
+    </nav>
+  );
+}
+
+function Article(props) {
+  return (
+    <article>
+      <h2>{props.title}</h2>
+      {props.body}
+    </article>
+  );
+}
+
+function Create(props) {
+  return (
+    <article>
+      <h2>Create</h2>
+      <form
+        onSubmit={(event) => {
+          // 폼을 제출하였을때 발생하는 이벤트
+          event.preventDefault();
+          const title = event.target.title.value;
+          const body = event.target.body.value;
+          props.onCreate(title, body);
+        }}
+      >
+        <p>
+          <input type="text" name="title" placeholder="title" />
+        </p>
+        <textarea name="body" placeholder="body"></textarea>
+        <p>
+          <input type="submit" value="Create"></input>
+        </p>
+      </form>
+    </article>
+  );
+}
+
+function Update(props) {
+  const [title, setTitle] = useState(props.title); // state로 환승(내부에서 변경하기 위해)
+  const [body, setBody] = useState(props.body);
+  return (
+    <article>
+      <h2>Update</h2>
+      <form
+        onSubmit={(event) => {
+          // 폼을 제출하였을때 발생하는 이벤트
+          event.preventDefault();
+          const title = event.target.title.value;
+          const body = event.target.body.value;
+          props.onUpdate(title, body);
+        }}
+      >
+        <p>
+          <input
+            type="text"
+            name="title"
+            placeholder="title"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          />
+        </p>
+        <p>
+          <textarea
+            name="body"
+            placeholder="body"
+            value={body}
+            onChange={(event) => {
+              setBody(event.target.value);
+            }}
+          ></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Update"></input>
+        </p>
+      </form>
+    </article>
+  );
+}
+
+function App() {
+  const [mode, setMode] = useState("WELCOME");
+  const [id, setId] = useState(null);
+  const [nextId, setNextId] = useState(4);
+  const [topics, setTopics] = useState([
+    // state로 승격
+    { id: 1, title: "html", body: "html is ..." },
+    { id: 2, title: "css", body: "css is ..." },
+    { id: 3, title: "javascript", body: "javascript is ..." },
+  ]);
+  let content = null;
+  let contextControl = null; // mode가 'READ'일때만
+  if (mode === "WELCOME") {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === "READ") {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = <Article title={title} body={body}></Article>;
+    contextControl = (
+      <>
+        <li>
+          <a
+            href={"/update" + id}
+            onClick={(event) => {
+              event.preventDefault();
+              setMode("UPDATE");
+            }}
+          >
+            Update
+          </a>
+        </li>
+        <li>
+          <input
+            type="button"
+            value="Delete"
+            onClick={() => {
+              const newTopics = [];
+              for (let i = 0; i < topics.length; i++) {
+                if (topics[i].id !== id) {
+                  newTopics.push(topics[i]);
+                }
+              }
+              setTopics(newTopics);
+              setMode("WELCOME");
+            }}
+          />
+        </li>
+      </>
+    );
+  } else if (mode === "CREATE") {
+    content = (
+      <Create
+        onCreate={(_title, _body) => {
+          const newTopic = { id: nextId, title: _title, body: _body };
+          const newTopics = [...topics];
+          newTopics.push(newTopic);
+          setTopics(newTopics); // reference 타입은 복사해서 넘기기
+          setId(nextId);
+          setMode("READ");
+          setNextId(nextId + 1);
+        }}
+      ></Create>
+    );
+  } else if (mode === "UPDATE") {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = (
+      <Update
+        title={title}
+        body={body}
+        onUpdate={(title, body) => {
+          const newTopics = [...topics];
+          const updatedTopic = { id: id, title: title, body: body };
+          for (let i = 0; i < newTopics.length; i++) {
+            if (newTopics[i].id === id) {
+              newTopics[i] = updatedTopic;
+              break;
+            }
+          }
+          setTopics(newTopics);
+          setMode("READ");
+        }}
+      ></Update>
+    );
+  }
+
+  return (
+    <div>
+      <Header
+        title="REACT"
+        onChangeMode={() => {
+          setMode("WELCOME");
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          setMode("READ");
+          setId(id);
+        }}
+      ></Nav>
+      {content}
+      <li>
+        <a
+          href="/create"
+          onClick={(event) => {
+            event.preventDefault();
+            setMode("CREATE");
+          }}
+        >
+          Create
+        </a>
+      </li>
+      {contextControl}
+    </div>
+  );
+}
+export default App;
+```
+
+---
+
+내 생각보다 많이 어려웠다.
+
+기존에 html => css => javascript 식으로 코드를 짜는 것과 반대로 javascript => html/css 식으로 코드를 짜니 신기하였고, 컴포넌트를 활용하니까 좋은 것 같긴 한데 익숙하지 않아서 그런지 엄청나게 효율적으로 느껴지지는 않는다.
+
+CRUD 라는 필수적이고 핵심적인 기능을 배워서 좋았고 계속계속 코드와 영상자료를 돌려봐야 겠다.
+
+다른 리액트 강의를 아직 보진 않았지만 입문자에게 생활코딩 리액트 강의는 매우 좋은 것 같다.
+
+## 참고자료
+
+https://www.youtube.com/playlist?list=PLuHgQVnccGMCOGstdDZvH41x0Vtvwyxu7
