@@ -81,6 +81,8 @@ export default App;
 
 리액트하나로 html css javascript 구현이 모두 가능한데 **역순**으로 만든다는 생각을 하자.
 
+## READ
+
 ### props
 
 `Props`는 컴포넌트의 외부에서 사용하는 입력값으로 우리가 만든 컴포넌트에 어떻게 장착할지 배워보자.
@@ -250,7 +252,7 @@ function App() {
 
 **`state`를 통해 각 li 태그들의 링크를 눌렀을때 다른 창을 보이도록 해보자.**
 
-<img src="https://i.postimg.cc/jjccCmbL/image.png" height="300">
+<img src="./../../react-app/state.gif">
 
 ```js
 function App() {
@@ -441,6 +443,134 @@ function App() {
 
 `Nav` 컴포넌트 함수에서 `id={t.id}`로 선언한 순간 id값은 문자열로 바뀌기 때문에 함수를 호출할때 `Number`로 감싸서 숫자로 변경시켜서 전달해야 한다.
 
-<img src="./../../react-app/state.gif">
+## CREATE
 
-완성된 모습이다.
+**`Create` 을 누르면 폼 태그가 생성되고, 폼에 정보를 입력한후 제출을 하면 4번부터 새로 목록이 생기고, 자동으로 그 목록으로 페이지 리로딩 없이 이동하는 기능을 구현해보자.**
+
+~~사진자리~~
+
+```js
+import { useState } from "react";
+
+function Header(props) {}
+
+function Nav(props) {}
+
+function Article(props) {}
+
+function Create(props) {
+  return (
+    <article>
+      <h2>Create</h2>
+      <form
+        onSubmit={(event) => {
+          // 폼을 제출하였을때 발생하는 이벤트
+          event.preventDefault();
+          const title = event.target.title.value;
+          const body = event.target.body.value;
+          props.onCreate(title, body);
+        }}
+      >
+        <p>
+          <input type="text" name="title" placeholder="title" />
+        </p>
+        <textarea name="body" placeholder="body"></textarea>
+        <p>
+          <input type="submit" value="Create"></input>
+        </p>
+      </form>
+    </article>
+  );
+}
+
+function App() {
+  const [mode, setMode] = useState("WELCOME");
+  const [id, setId] = useState(null);
+  const [nextId, setNextId] = useState(4);
+  const [topics, setTopics] = useState([
+    // state로 승격
+    { id: 1, title: "html", body: "html is ..." },
+    { id: 2, title: "css", body: "css is ..." },
+    { id: 3, title: "javascript", body: "javascript is ..." },
+  ]);
+  let content = null;
+  if (mode === "WELCOME") {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === "READ") {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = <Article title={title} body={body}></Article>;
+  } else if (mode === "CREATE") {
+    content = (
+      <Create
+        onCreate={(_title, _body) => {
+          const newTopic = { id: nextId, title: _title, body: _body };
+          const newTopics = [...topics];
+          newTopics.push(newTopic);
+          setTopics(newTopics); // reference 타입은 복사해서 넘기기
+          setId(nextId);
+          setMode("READ"); // 본문 이동
+          setNextId(nextId + 1);
+        }}
+      ></Create>
+    );
+  }
+
+  return (
+    <div>
+      <Header
+        title="REACT"
+        onChangeMode={() => {
+          setMode("WELCOME");
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          setMode("READ");
+          setId(id);
+        }}
+      ></Nav>
+      {content}
+      <a
+        href="/create"
+        onClick={(event) => {
+          event.preventDefault();
+          setMode("CREATE");
+        }}
+      >
+        Create
+      </a>
+    </div>
+  );
+}
+export default App;
+```
+
+따로 `CREATE` 컴포넌트를 만들어 create를 클릭 시 모드를 CREATE로 바꾸고 컴포넌트안에서 `onCreate`함수 인자로 `form` 태그의 값들을 보내 `App`함수에서 return 값을 갱신하여 UI를 변경시켰다.
+
+```js
+const newTopic = { id: nextId, title: _title, body: _body };
+const newTopics = [...topics];
+newTopics.push(newTopic);
+setTopics(newTopics); // reference 타입은 복사해서 넘기기
+setId(nextId);
+setMode("READ"); // 생성한 번호로 페이지 이동
+setNextId(nextId + 1);
+```
+
+`onCreate`를 자세히 살펴보면 state로 승격시킨 id값을 추가해 `newTopic`를 생성한다.
+
+여기서 복사를 하는 이유는 무엇일까?
+
+<img src="https://i.postimg.cc/pd3MqmnK/image.png">
+
+만약 배열을 그대로 넘기면 `setTopics`함수가 인자로 받은 값이 원본 값인지 아닌지 판단하여, **원본 값일 경우 렌더링을 하지 않기 때문**에 아무 변화가 일어나지 않는다.
+
+따라서 인자값이 `primitive` 값이 아닌 `reference`타입일 경우 복사를 해줘서 넘겨야 한다.
