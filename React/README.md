@@ -302,7 +302,7 @@ const mode = _mode[0];
 const setMode = _mode[1];
 ```
 
-우선 지역변수 `mode`를 상태(state)로 만들어보자.
+우선 지역변수 `_mode`를 상태(state)로 만들어보자.
 
 인자로는 초기값이 들어간다.
 
