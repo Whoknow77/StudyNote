@@ -18,6 +18,8 @@ StudyNote(공부하고 기록하는 공간)</h1>
 
 - [Git branch 전략](https://github.com/Whoknow77/StudyNote/blob/master/Git/gitbranch.md)
 
+- [Pull request](./Git/pullrequest.md)
+
 # [VSCode 단축키](command/command.md)
 
 # [CSS](./css/README.md)
