@@ -69,7 +69,6 @@
 - 버튼을 선택한다.
 
 - 원본저장소의 어떤 브랜치로 머지할지 선택한 후 Create Pull request 버튼 클릭 해준다.
-
 - Pull request 타이틀과 내용을 작성해주면 Pull request가 완료 된다.
 
 8. ### Merge Pull Request
