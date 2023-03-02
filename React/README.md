@@ -75,7 +75,7 @@ export default App;
 
 위와 같이 header, nav, article 태그들을 따로 JSX 문법을 사용하여 컴포넌트로 만들어서 코드를 작성하였다.
 
-이렇게 컴포넌트, JSX를 사용함으로써 재사용과 유지보수가 매우 쉬워졌다.
+이렇게 컴포넌트, JSX 문법을 사용함으로써 재사용과 유지보수가 매우 쉬워졌다.
 
 하지만, 여태껏 html css javascript순으로 웹페이지에 보여줬던걸 이제는 반대로 생각해야한다.
 
@@ -87,7 +87,7 @@ export default App;
 
 ### props
 
-`Props`는 컴포넌트의 외부에서 사용하는 입력값으로 우리가 만든 컴포넌트에 어떻게 장착할지 배워보자.
+`Props`는 컴포넌트의 외부에서 사용하는 입력값으로 우리가 만든 컴포넌트에 이것을 어떻게 장착할지 배워보자.
 
 ```js
 function Header(props) {
@@ -258,7 +258,7 @@ function App() {
 
 ```js
 function App() {
-  const mode = "WELCOME";
+  let mode = "WELCOME";
   const topics = [
     { id: 1, title: "html", body: "html is ..." },
     { id: 2, title: "css", body: "css is ..." },
@@ -280,7 +280,7 @@ function App() {
       ></Header>
       <Nav
         topics={topics}
-        onChangeMode={(id) => {
+        onChangeMode={() => {
           mode = "READ";
         }}
       ></Nav>
@@ -748,7 +748,7 @@ function App() {
 export default App;
 ```
 
-`Update` 폼은 기존의 데이터기반으로 수정을 해야 하니까 기존의 데이터를 가지고 있어야한다. 이 데이터는 `App`함수의 READ를 읽어와 `props`로 넘긴다.
+`Update` 폼은 기존의 데이터기반으로 수정을 해야 하니까 기존의 데이터를 가지고 있어야한다. 이 데이터는 `App`함수의 READ 모드에서 읽어와 `props`로 넘긴다.
 
 이제 각 li 태그를 누르고 update 클릭 시 본문 내용이 저절로 뜬다.
 
@@ -765,11 +765,11 @@ state : 내부자가 사용 하는 데이터, 내부에서 변경 가능
 
 하지만 이렇게 해도 여전히 변경되지 않는다.
 
-html에서 `onChange`는 값이 입력되고, 마우스가 바깥으로 나가야 이벤트가 발생되지만 리액트에서는 **값을 입력할때마다** 이벤트가 발생함
+html에서 `onChange`는 값이 입력되고, 마우스가 바깥으로 나가야 이벤트가 발생되지만 리액트에서는 **값을 입력할때마다** 이벤트가 발생한다.
 
 입력할때마다 `setTitle`함수가 실행되고 그때마다 컴포넌트가 다시 랜더링되면서 새로운 값이 `value`에 할당되는 방식이다.
 
-이후에 `Update` 버튼을 클릭하면 `onSubmit`을 호출되고, `title`과 `body`값을 `onUpdate`로 전달한다.
+이후에 `Update` 버튼을 클릭하면 `onSubmit`이 호출되고, `title`과 `body`값을 `onUpdate`로 전달한다.
 
 `id`값은 READ할때 이미 세팅이 되어있기 때문에 그대로 쓴다.
 
