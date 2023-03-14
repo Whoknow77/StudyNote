@@ -4,4 +4,4 @@
 
 # [관련주제](./Subject.md/subject.md/)
 
-# [리액트](./react.md/)
+# [리액트](./../React/README.md)
