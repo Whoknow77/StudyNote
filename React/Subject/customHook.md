@@ -101,3 +101,5 @@ export function useFetch(baseUrl, initialType) {
 네트워크 상에서 데이터를 가져오는 customHook이다.
 
 `baseUrl` 뒤에 `users` or `posts`등등이 올때마다 데이터를 다르게 받아오는데 이것을 다른 컴포넌트에서 사용하기 위해서 `useFetch`를 사용하면 편리하다.
+
+이제껏 배운 훅들 중에 가장 어려웠다.
