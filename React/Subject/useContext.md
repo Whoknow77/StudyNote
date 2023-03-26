@@ -129,11 +129,9 @@ export default App;
 
 
 // Page
-import React, { useContext } from "react";
 import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
-import { ThemeContext } from "./ThemeContext";
 
 const Page = () => {
   const data = useContext(ThemeContext);
