@@ -51,3 +51,5 @@
 - ## [화살표 함수와 일반 함수의 차이](./arrow.md)
 
 - ## [가상돔](./virtualDom.md)
+
+- ## [TypeScript](./typescript.md)
