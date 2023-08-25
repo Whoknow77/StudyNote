@@ -56,25 +56,19 @@
 
 - justify-content(아이템 배치 방법, 메인 축)
 
-  - flex-start : 기본값, 왼쪽부터 배치
+  <img src="https://velog.velcdn.com/images%2Fjenna8447%2Fpost%2Fde344670-c503-4ecf-942d-1723d1d4bcb1%2Fimage.png">
 
-    <img src="https://poiemaweb.com/img/flexbox-justify-content-flex-start.jpg">
+  - flex-start : 기본값, 왼쪽부터 배치
 
   - flex-end : 오른쪽으로 배치
 
-    <img src="https://poiemaweb.com/img/flexbox-justify-content-flex-end.jpg">
-
   - center : 중심으로 배치
 
-    <img src="https://poiemaweb.com/img/flexbox-justify-content-center.jpg">
+  - space-around : 앞, 뒤, 요소들 사이에 여유 공간 두고 배치(요소들 사이의 간격 = 양끝 간격 \* 2)
 
-  - space-around : 앞, 뒤, 요소들 사이에 여유 공간 두고 배치
+  - space-between : 요소들 사이에만 여유 공간을 두고 배치(양쪽은 끝에다 고정)
 
-    <img src="https://poiemaweb.com/img/flexbox-justify-content-space-between.jpg">
-
-  - space-between : 요소들 사이에만 여유 공간을 두고 배치
-
-    <img src="https://poiemaweb.com/img/flexbox-justify-content-center.jpg">
+  - space-evenly : 요소들 사이의 모든 공간 똑같이 배치
 
 - align-items(아이템 배치 방법, 반대 축)
 
